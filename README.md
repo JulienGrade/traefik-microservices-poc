@@ -29,3 +29,7 @@ Ajouter les lanceurs Unix et Windows. Vérifier `./mvnw --version` ; Windows : `
 ### build(product): créer le squelette Spring Boot du catalogue
 
 Créer le projet avec POM, classe de démarrage, propriétés et test de contexte. `./mvnw -pl product-service -am test`. Le squelette n’expose pas encore de serveur HTTP.
+
+### build(product): activer le serveur HTTP et la sérialisation JSON
+
+Ajouter Spring Web. `./mvnw -pl product-service spring-boot:run` : le serveur écoute sur 8081 ; les routes métier restent à ajouter.
