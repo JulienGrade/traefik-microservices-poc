@@ -21,3 +21,7 @@ Créer la branche main et le README. Contrôler `git status` et `git log -1 --fo
 ### build(maven): créer le parent multi-module Spring Boot
 
 Définir Spring Boot 3.5.16, Java 17 et les coordonnées communes. Avec Maven installé : `mvn validate`. Aucun service n’est encore créé.
+
+### build(maven): ajouter le wrapper Maven 3.9.11
+
+Ajouter les lanceurs Unix et Windows. Vérifier `./mvnw --version` ; Windows : `.\mvnw.cmd --version`. Toutes les commandes suivantes partent de la racine du dépôt.
