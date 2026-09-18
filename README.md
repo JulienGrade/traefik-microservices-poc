@@ -53,3 +53,7 @@ Ajouter `GET /products/{id}` et la recherche dans le service. `curl -i localhost
 ### test(product): vérifier les contrats HTTP du catalogue
 
 Tester la liste, le prix exact et le produit absent avec un vrai serveur Spring Boot sur port aléatoire. `./mvnw -pl product-service -am test`.
+
+### feat(product): exposer la santé du catalogue
+
+Ajouter Actuator, exposer uniquement health/info et activer Problem Details. Après lancement : `curl localhost:8081/actuator/health` retourne UP.
