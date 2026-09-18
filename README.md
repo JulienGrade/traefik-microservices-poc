@@ -37,3 +37,7 @@ Ajouter Spring Web. `./mvnw -pl product-service spring-boot:run` : le serveur é
 ### feat(product): définir le modèle du produit
 
 Définir le contrat produit : identifiant, nom et prix BigDecimal. Vérifier `./mvnw -pl product-service -am test`.
+
+### feat(product): initialiser le catalogue en mémoire
+
+Ajouter trois produits fixes et le service de consultation du catalogue, avec test du prix exact. `./mvnw -pl product-service -am test`.
