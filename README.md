@@ -57,3 +57,7 @@ Tester la liste, le prix exact et le produit absent avec un vrai serveur Spring 
 ### feat(product): exposer la santé du catalogue
 
 Ajouter Actuator, exposer uniquement health/info et activer Problem Details. Après lancement : `curl localhost:8081/actuator/health` retourne UP.
+
+### feat(product): identifier l’instance qui répond aux requêtes
+
+Ajouter `/products/instance`, alimenté par HOSTNAME, pour observer les réplicas. `curl localhost:8081/products/instance`. Tester : `./mvnw -pl product-service -am test`.
