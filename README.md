@@ -17,3 +17,7 @@ Auteur : `JulienGrade <JulienGrade@users.noreply.github.com>`.
 ### chore(repo): initialiser le dépôt et les exclusions Git
 
 Créer la branche main et le README. Contrôler `git status` et `git log -1 --format=fuller`.
+
+### build(maven): créer le parent multi-module Spring Boot
+
+Définir Spring Boot 3.5.16, Java 17 et les coordonnées communes. Avec Maven installé : `mvn validate`. Aucun service n’est encore créé.
