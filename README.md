@@ -49,3 +49,7 @@ Ajouter `GET /products` et l’injection du catalogue dans le contrôleur. Déma
 ### feat(product): consulter un produit et retourner 404 si absent
 
 Ajouter `GET /products/{id}` et la recherche dans le service. `curl -i localhost:8081/products/1` : 200 ; `/products/999` : 404.
+
+### test(product): vérifier les contrats HTTP du catalogue
+
+Tester la liste, le prix exact et le produit absent avec un vrai serveur Spring Boot sur port aléatoire. `./mvnw -pl product-service -am test`.
