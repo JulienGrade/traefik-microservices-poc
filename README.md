@@ -41,3 +41,7 @@ Définir le contrat produit : identifiant, nom et prix BigDecimal. Vérifier `./
 ### feat(product): initialiser le catalogue en mémoire
 
 Ajouter trois produits fixes et le service de consultation du catalogue, avec test du prix exact. `./mvnw -pl product-service -am test`.
+
+### feat(product): exposer la liste des produits
+
+Ajouter `GET /products` et l’injection du catalogue dans le contrôleur. Démarrer product-service, puis `curl -i localhost:8081/products` : 200 et trois produits.
