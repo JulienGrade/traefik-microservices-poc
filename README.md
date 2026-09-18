@@ -25,3 +25,7 @@ Définir Spring Boot 3.5.16, Java 17 et les coordonnées communes. Avec Maven in
 ### build(maven): ajouter le wrapper Maven 3.9.11
 
 Ajouter les lanceurs Unix et Windows. Vérifier `./mvnw --version` ; Windows : `.\mvnw.cmd --version`. Toutes les commandes suivantes partent de la racine du dépôt.
+
+### build(product): créer le squelette Spring Boot du catalogue
+
+Créer le projet avec POM, classe de démarrage, propriétés et test de contexte. `./mvnw -pl product-service -am test`. Le squelette n’expose pas encore de serveur HTTP.
