@@ -33,3 +33,7 @@ Créer le projet avec POM, classe de démarrage, propriétés et test de context
 ### build(product): activer le serveur HTTP et la sérialisation JSON
 
 Ajouter Spring Web. `./mvnw -pl product-service spring-boot:run` : le serveur écoute sur 8081 ; les routes métier restent à ajouter.
+
+### feat(product): définir le modèle du produit
+
+Définir le contrat produit : identifiant, nom et prix BigDecimal. Vérifier `./mvnw -pl product-service -am test`.
