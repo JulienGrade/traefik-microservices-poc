@@ -45,3 +45,7 @@ Ajouter trois produits fixes et le service de consultation du catalogue, avec te
 ### feat(product): exposer la liste des produits
 
 Ajouter `GET /products` et l’injection du catalogue dans le contrôleur. Démarrer product-service, puis `curl -i localhost:8081/products` : 200 et trois produits.
+
+### feat(product): consulter un produit et retourner 404 si absent
+
+Ajouter `GET /products/{id}` et la recherche dans le service. `curl -i localhost:8081/products/1` : 200 ; `/products/999` : 404.

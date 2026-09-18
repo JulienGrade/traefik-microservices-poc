@@ -15,4 +15,8 @@ public class ProductCatalog {
 
     public List<Product> all() { return products; }
 
+    public Product find(long id) {
+        return products.stream().filter(p -> p.id() == id).findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produit introuvable"));
+    }
 }
