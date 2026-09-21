@@ -24,4 +24,9 @@ public class OrderService {
         return order;
     }
 
+    public Order find(UUID id) {
+        var order = orders.get(id);
+        if (order == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Commande introuvable");
+        return order;
+    }
 }

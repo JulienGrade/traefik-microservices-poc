@@ -101,3 +101,7 @@ Ajouter UUID, produit, quantité, prix unitaire, total et date de création. Uti
 ### feat(order): créer une commande au prix du catalogue
 
 Calculer le montant côté serveur et enregistrer la commande dans une map concurrente. Ajouter le test de calcul métier. `./mvnw -pl order-service -am test`.
+
+### feat(order): retrouver une commande par son identifiant
+
+Ajouter la recherche d’une commande enregistrée et le 404 si elle est absente. Le stockage est local au processus et disparaît au redémarrage. `./mvnw -pl order-service -am test`.
