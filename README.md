@@ -105,3 +105,7 @@ Calculer le montant côté serveur et enregistrer la commande dans une map concu
 ### feat(order): retrouver une commande par son identifiant
 
 Ajouter la recherche d’une commande enregistrée et le 404 si elle est absente. Le stockage est local au processus et disparaît au redémarrage. `./mvnw -pl order-service -am test`.
+
+### feat(order): exposer la création HTTP d’une commande
+
+Ajouter `POST /orders`, validation, statut 201 et Location. Avec les deux services lancés : `curl -i localhost:8082/orders -H "Content-Type: application/json" -d '{"productId":1,"quantity":2}'` ; total attendu 179.80.
