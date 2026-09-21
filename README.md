@@ -61,3 +61,7 @@ Ajouter Actuator, exposer uniquement health/info et activer Problem Details. Apr
 ### feat(product): identifier l’instance qui répond aux requêtes
 
 Ajouter `/products/instance`, alimenté par HOSTNAME, pour observer les réplicas. `curl localhost:8081/products/instance`. Tester : `./mvnw -pl product-service -am test`.
+
+### build(order): créer le squelette Spring Boot des commandes
+
+Créer séparément le deuxième projet, son POM, sa classe de démarrage et son test de contexte. `./mvnw -pl order-service -am test`.
