@@ -65,3 +65,7 @@ Ajouter `/products/instance`, alimenté par HOSTNAME, pour observer les réplica
 ### build(order): créer le squelette Spring Boot des commandes
 
 Créer séparément le deuxième projet, son POM, sa classe de démarrage et son test de contexte. `./mvnw -pl order-service -am test`.
+
+### build(order): activer le serveur HTTP des commandes
+
+Ajouter Spring Web. `./mvnw -pl order-service spring-boot:run` démarre sur 8082, sans route métier à ce stade.
