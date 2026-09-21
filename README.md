@@ -77,3 +77,7 @@ Ajouter Jakarta Validation via le starter Spring Boot. `./mvnw -pl order-service
 ### feat(order): définir le contrat de réponse du catalogue
 
 Définir le DTO reçu du catalogue dans le service commandes, sans dépendance au module product-service. Vérifier `./mvnw -pl order-service -am test`.
+
+### feat(order): appeler le catalogue avec RestClient
+
+Créer le client HTTP configurable par CATALOG_URL. L’appel interservices est direct ; aucune passerelle n’intervient entre les deux services. Vérifier `./mvnw -pl order-service -am test`.
