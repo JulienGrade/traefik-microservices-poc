@@ -89,3 +89,7 @@ Limiter connexion et lecture à deux secondes ; traduire produit absent en 404, 
 ### test(order): couvrir les réponses du client catalogue
 
 Tester le vrai RestClient contre un serveur HTTP de test : succès, 404, erreur serveur et connexion refusée. `./mvnw -pl order-service -am test`.
+
+### feat(order): définir et valider la demande de commande
+
+Exiger un identifiant de produit positif et une quantité comprise entre 1 et 100. `./mvnw -pl order-service -am test`.
