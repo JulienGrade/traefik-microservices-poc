@@ -73,3 +73,7 @@ Ajouter Spring Web. `./mvnw -pl order-service spring-boot:run` démarre sur 8082
 ### build(order): ajouter la validation des requêtes
 
 Ajouter Jakarta Validation via le starter Spring Boot. `./mvnw -pl order-service -am test`. Les contraintes métier seront définies dans le contrat de création.
+
+### feat(order): définir le contrat de réponse du catalogue
+
+Définir le DTO reçu du catalogue dans le service commandes, sans dépendance au module product-service. Vérifier `./mvnw -pl order-service -am test`.
