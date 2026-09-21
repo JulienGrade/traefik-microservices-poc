@@ -109,3 +109,7 @@ Ajouter la recherche d’une commande enregistrée et le 404 si elle est absente
 ### feat(order): exposer la création HTTP d’une commande
 
 Ajouter `POST /orders`, validation, statut 201 et Location. Avec les deux services lancés : `curl -i localhost:8082/orders -H "Content-Type: application/json" -d '{"productId":1,"quantity":2}'` ; total attendu 179.80.
+
+### feat(order): exposer la consultation HTTP d’une commande
+
+Ajouter `GET /orders/{uuid}`. Réutiliser un identifiant reçu lors de la création ; attendre 200. Un UUID inexistant renvoie 404.

@@ -19,4 +19,5 @@ public class OrderController {
         return ResponseEntity.created(URI.create("/api/orders/" + order.id())).body(order);
     }
 
+    @GetMapping("/{id}") public Order find(@PathVariable UUID id) { return orders.find(id); }
 }
