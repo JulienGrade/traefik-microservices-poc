@@ -93,3 +93,7 @@ Tester le vrai RestClient contre un serveur HTTP de test : succès, 404, erreur 
 ### feat(order): définir et valider la demande de commande
 
 Exiger un identifiant de produit positif et une quantité comprise entre 1 et 100. `./mvnw -pl order-service -am test`.
+
+### feat(order): définir le modèle de commande
+
+Ajouter UUID, produit, quantité, prix unitaire, total et date de création. Utiliser BigDecimal pour les montants. `./mvnw -pl order-service -am test`.
