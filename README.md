@@ -81,3 +81,7 @@ Définir le DTO reçu du catalogue dans le service commandes, sans dépendance a
 ### feat(order): appeler le catalogue avec RestClient
 
 Créer le client HTTP configurable par CATALOG_URL. L’appel interservices est direct ; aucune passerelle n’intervient entre les deux services. Vérifier `./mvnw -pl order-service -am test`.
+
+### fix(order): borner les délais et traduire les pannes du catalogue
+
+Limiter connexion et lecture à deux secondes ; traduire produit absent en 404, panne distante en 503 et réponse incohérente en 502. Vérifier `./mvnw -pl order-service -am test`.
