@@ -117,3 +117,7 @@ Ajouter `GET /orders/{uuid}`. Réutiliser un identifiant reçu lors de la créat
 ### test(order): vérifier création lecture et quantités invalides
 
 Tester HTTP 201, Location, prix serveur, relecture, quantités invalides et commande absente. `./mvnw -pl order-service -am test`.
+
+### feat(order): exposer la santé du service commandes
+
+Ajouter Actuator et Problem Details. `curl localhost:8082/actuator/health` : UP après lancement. Les détails de santé ne sont pas exposés.
