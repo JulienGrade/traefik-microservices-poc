@@ -113,3 +113,7 @@ Ajouter `POST /orders`, validation, statut 201 et Location. Avec les deux servic
 ### feat(order): exposer la consultation HTTP d’une commande
 
 Ajouter `GET /orders/{uuid}`. Réutiliser un identifiant reçu lors de la création ; attendre 200. Un UUID inexistant renvoie 404.
+
+### test(order): vérifier création lecture et quantités invalides
+
+Tester HTTP 201, Location, prix serveur, relecture, quantités invalides et commande absente. `./mvnw -pl order-service -am test`.
