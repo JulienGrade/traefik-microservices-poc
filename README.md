@@ -121,3 +121,7 @@ Tester HTTP 201, Location, prix serveur, relecture, quantités invalides et comm
 ### feat(order): exposer la santé du service commandes
 
 Ajouter Actuator et Problem Details. `curl localhost:8082/actuator/health` : UP après lancement. Les détails de santé ne sont pas exposés.
+
+### feat(order): identifier le service commandes derrière la gateway
+
+Ajouter `/orders/instance`. `curl localhost:8082/orders/instance` retourne le nom du service et son hostname. Ce service restera à une instance tant que son stockage est en mémoire.
