@@ -97,3 +97,7 @@ Exiger un identifiant de produit positif et une quantité comprise entre 1 et 10
 ### feat(order): définir le modèle de commande
 
 Ajouter UUID, produit, quantité, prix unitaire, total et date de création. Utiliser BigDecimal pour les montants. `./mvnw -pl order-service -am test`.
+
+### feat(order): créer une commande au prix du catalogue
+
+Calculer le montant côté serveur et enregistrer la commande dans une map concurrente. Ajouter le test de calcul métier. `./mvnw -pl order-service -am test`.
