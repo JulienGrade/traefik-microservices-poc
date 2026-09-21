@@ -85,3 +85,7 @@ Créer le client HTTP configurable par CATALOG_URL. L’appel interservices est 
 ### fix(order): borner les délais et traduire les pannes du catalogue
 
 Limiter connexion et lecture à deux secondes ; traduire produit absent en 404, panne distante en 503 et réponse incohérente en 502. Vérifier `./mvnw -pl order-service -am test`.
+
+### test(order): couvrir les réponses du client catalogue
+
+Tester le vrai RestClient contre un serveur HTTP de test : succès, 404, erreur serveur et connexion refusée. `./mvnw -pl order-service -am test`.
