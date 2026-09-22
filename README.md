@@ -125,3 +125,7 @@ Ajouter Actuator et Problem Details. `curl localhost:8082/actuator/health` : UP 
 ### feat(order): identifier le service commandes derrière la gateway
 
 Ajouter `/orders/instance`. `curl localhost:8082/orders/instance` retourne le nom du service et son hostname. Ce service restera à une instance tant que son stockage est en mémoire.
+
+### build(shipping): créer le squelette Spring Boot de livraison
+
+Créer séparément le troisième projet avec son test de contexte. `./mvnw -pl shipping-service -am test`. Il servira à constater l’ajout d’une route après démarrage de Traefik.
