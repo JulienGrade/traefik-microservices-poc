@@ -157,3 +157,7 @@ Ajouter le build Maven multi-stage de product-service, tests inclus, puis le JAR
 ### build(order): conteneuriser le service avec un runtime non root
 
 Ajouter le build Maven multi-stage de order-service, tests inclus, puis le JAR dans une image JRE. `docker build -f order-service/Dockerfile -t poc-order .`. Aucun serveur Maven n’est conservé dans le runtime.
+
+### build(shipping): conteneuriser le service avec un runtime non root
+
+Ajouter le build Maven multi-stage de shipping-service, tests inclus, puis le JAR dans une image JRE. `docker build -f shipping-service/Dockerfile -t poc-shipping .`. Aucun serveur Maven n’est conservé dans le runtime.
