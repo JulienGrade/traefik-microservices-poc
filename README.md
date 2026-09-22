@@ -145,3 +145,7 @@ Tester le statut 200 et la réponse du devis sur un vrai serveur Spring Boot. `.
 ### feat(shipping): exposer la santé du service de livraison
 
 Ajouter `/actuator/health` pour les contrôles Docker et Traefik. `./mvnw verify` valide désormais les trois services.
+
+### build(docker): exclure les fichiers inutiles des contextes de build
+
+Exclure les sorties Maven, les métadonnées Git et les réglages locaux. Les prochains builds Docker ne copieront que les sources utiles.
