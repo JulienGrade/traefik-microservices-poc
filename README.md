@@ -141,3 +141,7 @@ Ajouter `GET /shipping/quote` avec montant 4.90 EUR et délai trois jours. Aprè
 ### test(shipping): vérifier le contrat du devis
 
 Tester le statut 200 et la réponse du devis sur un vrai serveur Spring Boot. `./mvnw -pl shipping-service -am test`.
+
+### feat(shipping): exposer la santé du service de livraison
+
+Ajouter `/actuator/health` pour les contrôles Docker et Traefik. `./mvnw verify` valide désormais les trois services.
