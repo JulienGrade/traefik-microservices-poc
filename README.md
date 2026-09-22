@@ -133,3 +133,7 @@ Créer séparément le troisième projet avec son test de contexte. `./mvnw -pl 
 ### build(shipping): activer le serveur HTTP de livraison
 
 Ajouter Spring Web. `./mvnw -pl shipping-service spring-boot:run` : serveur sur 8083, sans route de devis à ce stade.
+
+### feat(shipping): exposer un devis de livraison
+
+Ajouter `GET /shipping/quote` avec montant 4.90 EUR et délai trois jours. Après lancement : `curl localhost:8083/shipping/quote`.
