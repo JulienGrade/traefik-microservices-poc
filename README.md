@@ -129,3 +129,7 @@ Ajouter `/orders/instance`. `curl localhost:8082/orders/instance` retourne le no
 ### build(shipping): créer le squelette Spring Boot de livraison
 
 Créer séparément le troisième projet avec son test de contexte. `./mvnw -pl shipping-service -am test`. Il servira à constater l’ajout d’une route après démarrage de Traefik.
+
+### build(shipping): activer le serveur HTTP de livraison
+
+Ajouter Spring Web. `./mvnw -pl shipping-service spring-boot:run` : serveur sur 8083, sans route de devis à ce stade.
