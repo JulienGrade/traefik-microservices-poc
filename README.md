@@ -205,3 +205,7 @@ Déplacer stripPrefix dans une chaîne commune et ajouter les en-têtes X-Gatewa
 ### feat(traefik): compresser les réponses compatibles
 
 Ajouter le middleware compress à la chaîne commune. Vérifier `curl -I -H "Accept-Encoding: gzip" localhost:8080/api/products` ; une petite réponse peut rester non compressée sous le seuil du middleware.
+
+### feat(traefik): limiter le débit du catalogue
+
+Appliquer un quota de 20 requêtes/s avec burst 40, uniquement sur le catalogue. Après `docker compose up -d`, une rafale doit produire des 429, puis les appels reviennent à 200 après recharge. Le quota est par IP et local à cette gateway.

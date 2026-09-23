@@ -16,3 +16,8 @@ http:
           X-Gateway: traefik
     compression:
       compress: {}
+    product-rate:
+      rateLimit:
+        average: 20
+        burst: 40
+        period: 1s

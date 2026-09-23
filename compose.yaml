@@ -37,7 +37,7 @@ services:
       traefik.enable: "true"
       traefik.http.routers.products.rule: "Path(`/api/products`) || PathPrefix(`/api/products/`)"
       traefik.http.routers.products.entrypoints: web
-      traefik.http.routers.products.middlewares: api-common@file
+      traefik.http.routers.products.middlewares: api-common@file,product-rate@file
       traefik.http.services.products.loadbalancer.server.port: "8080"
       traefik.http.services.products.loadbalancer.healthcheck.path: /actuator/health
       traefik.http.services.products.loadbalancer.healthcheck.interval: 3s
