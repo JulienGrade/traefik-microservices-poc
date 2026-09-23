@@ -185,3 +185,7 @@ Ajouter le provider Docker avec exposition désactivée par défaut, déclarer l
 ### feat(traefik): router les commandes et retirer leur port direct
 
 Exposer les commandes via `/api/orders` sur la même entrée 8080 et retirer 8082 de l’hôte. Après `docker compose up -d`, tester la création de commande à travers la gateway. `/api/orders/instance` identifie le service atteint.
+
+### feat(traefik): exposer le dashboard sur une entrée locale distincte
+
+Après `docker compose up -d`, ouvrir `http://localhost:8088/dashboard/` avec le slash final. Le dashboard est séparé de l’entrée API ; `curl -i localhost:8080/api/http/routers` reste en 404. Usage local sans authentification.

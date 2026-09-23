@@ -7,11 +7,19 @@ services:
       - --providers.docker.exposedbydefault=false
       - --providers.docker.network=traefik-poc-edge
       - --entrypoints.web.address=:80
+      - --entrypoints.admin.address=:8080
+      - --api.dashboard=true
     ports:
       - "127.0.0.1:8080:80"
+      - "127.0.0.1:8088:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks: [edge]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.dashboard.rule: "PathPrefix(`/api`) || PathPrefix(`/dashboard`)"
+      traefik.http.routers.dashboard.entrypoints: admin
+      traefik.http.routers.dashboard.service: api@internal
   product-service:
     build:
       context: .
