@@ -165,3 +165,7 @@ Ajouter le build Maven multi-stage de shipping-service, tests inclus, puis le JA
 ### build(compose): relier catalogue et commandes sur le réseau Docker
 
 Définir les deux services principaux et leur réseau partagé. `docker compose up --build -d`, puis `curl localhost:8081/products`. Les commandes appellent le catalogue par le DNS Docker ; aucun nom de conteneur fixe.
+
+### fix(product): contrôler la disponibilité HTTP du conteneur
+
+Ajouter curl et le HEALTHCHECK Actuator dans l’image product-service. Vérifier après reconstruction avec `docker compose ps` ; le healthcheck de shipping sera utilisé lors de son activation optionnelle.
