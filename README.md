@@ -197,3 +197,7 @@ Activer les access logs. Après `docker compose up -d` et un appel API : `docker
 ### feat(traefik): contrôler activement la santé des serveurs
 
 Ajouter les healthchecks Traefik sur les deux services. Après `docker compose up -d`, consulter leur état dans le dashboard. Cette surveillance traite le trafic gateway ; elle est indépendante des healthchecks Docker et de l’appel interne order → product.
+
+### feat(traefik): partager et recharger les middlewares par fichier
+
+Déplacer stripPrefix dans une chaîne commune et ajouter les en-têtes X-Gateway et nosniff. Après `docker compose up -d`, `curl -i localhost:8080/api/products` doit afficher ces deux en-têtes. Les futurs changements du fichier sont surveillés sans redémarrage de Traefik.

@@ -1,0 +1,15 @@
+http:
+  middlewares:
+    api-common:
+      chain:
+        middlewares:
+          - strip-api
+          - response-headers
+    strip-api:
+      stripPrefix:
+        prefixes: [/api]
+    response-headers:
+      headers:
+        contentTypeNosniff: true
+        customResponseHeaders:
+          X-Gateway: traefik
