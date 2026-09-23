@@ -173,3 +173,7 @@ Ajouter curl et le HEALTHCHECK Actuator dans l’image product-service. Vérifie
 ### fix(order): contrôler la disponibilité HTTP du conteneur
 
 Ajouter curl et le HEALTHCHECK Actuator dans l’image order-service. Attendre un catalogue healthy avant de démarrer les commandes. Vérifier après reconstruction avec `docker compose ps` ; le healthcheck de shipping sera utilisé lors de son activation optionnelle.
+
+### fix(shipping): contrôler la disponibilité HTTP du conteneur
+
+Ajouter curl et le HEALTHCHECK Actuator dans l’image shipping-service. Vérifier après reconstruction avec `docker compose ps` ; le healthcheck de shipping sera utilisé lors de son activation optionnelle.
