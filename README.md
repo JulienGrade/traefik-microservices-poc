@@ -177,3 +177,7 @@ Ajouter curl et le HEALTHCHECK Actuator dans l’image order-service. Attendre u
 ### fix(shipping): contrôler la disponibilité HTTP du conteneur
 
 Ajouter curl et le HEALTHCHECK Actuator dans l’image shipping-service. Vérifier après reconstruction avec `docker compose ps` ; le healthcheck de shipping sera utilisé lors de son activation optionnelle.
+
+### feat(traefik): découvrir et router le catalogue par labels Docker
+
+Ajouter le provider Docker avec exposition désactivée par défaut, déclarer la route catalogue et retirer son port hôte. `docker compose up --build -d --wait --wait-timeout 180`, puis `curl localhost:8080/api/products` : 200. Les labels remplacent la liste centrale d’adresses.

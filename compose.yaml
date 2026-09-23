@@ -1,14 +1,31 @@
 name: traefik-poc
 services:
+  traefik:
+    image: traefik:v3.6.2
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=traefik-poc-edge
+      - --entrypoints.web.address=:80
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks: [edge]
   product-service:
     build:
       context: .
       dockerfile: product-service/Dockerfile
     environment:
       SERVER_PORT: 8080
-    ports:
-      - "127.0.0.1:8081:8080"
     networks: [edge]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.products.rule: "Path(`/api/products`) || PathPrefix(`/api/products/`)"
+      traefik.http.routers.products.entrypoints: web
+      traefik.http.routers.products.middlewares: strip-api
+      traefik.http.middlewares.strip-api.stripprefix.prefixes: /api
+      traefik.http.services.products.loadbalancer.server.port: "8080"
   order-service:
     build:
       context: .
