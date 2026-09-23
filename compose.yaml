@@ -36,9 +36,13 @@ services:
     depends_on:
       product-service:
         condition: service_healthy
-    ports:
-      - "127.0.0.1:8082:8080"
     networks: [edge]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.orders.rule: "Path(`/api/orders`) || PathPrefix(`/api/orders/`)"
+      traefik.http.routers.orders.entrypoints: web
+      traefik.http.routers.orders.middlewares: strip-api
+      traefik.http.services.orders.loadbalancer.server.port: "8080"
 networks:
   edge:
     name: traefik-poc-edge

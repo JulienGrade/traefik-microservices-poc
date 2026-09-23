@@ -181,3 +181,7 @@ Ajouter curl et le HEALTHCHECK Actuator dans l’image shipping-service. Vérifi
 ### feat(traefik): découvrir et router le catalogue par labels Docker
 
 Ajouter le provider Docker avec exposition désactivée par défaut, déclarer la route catalogue et retirer son port hôte. `docker compose up --build -d --wait --wait-timeout 180`, puis `curl localhost:8080/api/products` : 200. Les labels remplacent la liste centrale d’adresses.
+
+### feat(traefik): router les commandes et retirer leur port direct
+
+Exposer les commandes via `/api/orders` sur la même entrée 8080 et retirer 8082 de l’hôte. Après `docker compose up -d`, tester la création de commande à travers la gateway. `/api/orders/instance` identifie le service atteint.
