@@ -169,3 +169,7 @@ Définir les deux services principaux et leur réseau partagé. `docker compose 
 ### fix(product): contrôler la disponibilité HTTP du conteneur
 
 Ajouter curl et le HEALTHCHECK Actuator dans l’image product-service. Vérifier après reconstruction avec `docker compose ps` ; le healthcheck de shipping sera utilisé lors de son activation optionnelle.
+
+### fix(order): contrôler la disponibilité HTTP du conteneur
+
+Ajouter curl et le HEALTHCHECK Actuator dans l’image order-service. Attendre un catalogue healthy avant de démarrer les commandes. Vérifier après reconstruction avec `docker compose ps` ; le healthcheck de shipping sera utilisé lors de son activation optionnelle.
