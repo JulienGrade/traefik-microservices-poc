@@ -193,3 +193,7 @@ Après `docker compose up -d`, ouvrir `http://localhost:8088/dashboard/` avec le
 ### feat(traefik): journaliser les requêtes au format JSON
 
 Activer les access logs. Après `docker compose up -d` et un appel API : `docker compose logs traefik` permet de retrouver route, service, statut et durée de la requête.
+
+### feat(traefik): contrôler activement la santé des serveurs
+
+Ajouter les healthchecks Traefik sur les deux services. Après `docker compose up -d`, consulter leur état dans le dashboard. Cette surveillance traite le trafic gateway ; elle est indépendante des healthchecks Docker et de l’appel interne order → product.
