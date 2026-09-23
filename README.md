@@ -189,3 +189,7 @@ Exposer les commandes via `/api/orders` sur la même entrée 8080 et retirer 808
 ### feat(traefik): exposer le dashboard sur une entrée locale distincte
 
 Après `docker compose up -d`, ouvrir `http://localhost:8088/dashboard/` avec le slash final. Le dashboard est séparé de l’entrée API ; `curl -i localhost:8080/api/http/routers` reste en 404. Usage local sans authentification.
+
+### feat(traefik): journaliser les requêtes au format JSON
+
+Activer les access logs. Après `docker compose up -d` et un appel API : `docker compose logs traefik` permet de retrouver route, service, statut et durée de la requête.
