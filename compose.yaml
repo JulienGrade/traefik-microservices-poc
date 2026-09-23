@@ -62,6 +62,23 @@ services:
       traefik.http.services.orders.loadbalancer.healthcheck.path: /actuator/health
       traefik.http.services.orders.loadbalancer.healthcheck.interval: 3s
       traefik.http.services.orders.loadbalancer.healthcheck.timeout: 1s
+  shipping-service:
+    profiles: [discovery]
+    build:
+      context: .
+      dockerfile: shipping-service/Dockerfile
+    environment:
+      SERVER_PORT: 8080
+    networks: [edge]
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.shipping.rule: "PathPrefix(`/api/shipping/`)"
+      traefik.http.routers.shipping.entrypoints: web
+      traefik.http.routers.shipping.middlewares: api-common@file
+      traefik.http.services.shipping.loadbalancer.server.port: "8080"
+      traefik.http.services.shipping.loadbalancer.healthcheck.path: /actuator/health
+      traefik.http.services.shipping.loadbalancer.healthcheck.interval: 3s
+      traefik.http.services.shipping.loadbalancer.healthcheck.timeout: 1s
 networks:
   edge:
     name: traefik-poc-edge

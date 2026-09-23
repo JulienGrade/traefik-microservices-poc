@@ -209,3 +209,7 @@ Ajouter le middleware compress à la chaîne commune. Vérifier `curl -I -H "Acc
 ### feat(traefik): limiter le débit du catalogue
 
 Appliquer un quota de 20 requêtes/s avec burst 40, uniquement sur le catalogue. Après `docker compose up -d`, une rafale doit produire des 429, puis les appels reviennent à 200 après recharge. Le quota est par IP et local à cette gateway.
+
+### feat(discovery): découvrir le service optionnel de livraison
+
+Avant activation, `/api/shipping/quote` renvoie 404. Lancer `docker compose --profile discovery up --build -d --wait shipping-service`, puis vérifier 200. Aucun changement de configuration Traefik ni de ses routes existantes. Arrêter avec `docker compose --profile discovery stop shipping-service` : après convergence, la route revient à 404.
