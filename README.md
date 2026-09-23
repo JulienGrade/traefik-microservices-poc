@@ -161,3 +161,7 @@ Ajouter le build Maven multi-stage de order-service, tests inclus, puis le JAR d
 ### build(shipping): conteneuriser le service avec un runtime non root
 
 Ajouter le build Maven multi-stage de shipping-service, tests inclus, puis le JAR dans une image JRE. `docker build -f shipping-service/Dockerfile -t poc-shipping .`. Aucun serveur Maven n’est conservé dans le runtime.
+
+### build(compose): relier catalogue et commandes sur le réseau Docker
+
+Définir les deux services principaux et leur réseau partagé. `docker compose up --build -d`, puis `curl localhost:8081/products`. Les commandes appellent le catalogue par le DNS Docker ; aucun nom de conteneur fixe.
