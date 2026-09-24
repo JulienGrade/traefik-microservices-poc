@@ -221,3 +221,7 @@ Ajouter un module Maven activé uniquement par `-Pe2e`, JUnit et Failsafe, avec 
 ### test(api): vérifier le parcours métier à travers Traefik en Java
 
 Avec la stack démarrée : `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ApiContractsIT`. Vérifier catalogue, prix exact, création et relecture d’une commande, validation et produit absent.
+
+### test(routing): contrôler les frontières des routes exposées
+
+Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=RoutingIsolationIT`. Vérifier que les préfixes ressemblants, Actuator et l’API du dashboard ne sont pas exposés sur l’entrée métier.
