@@ -225,3 +225,7 @@ Avec la stack démarrée : `./mvnw -Pe2e -pl integration-tests verify -Dit.test=
 ### test(routing): contrôler les frontières des routes exposées
 
 Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=RoutingIsolationIT`. Vérifier que les préfixes ressemblants, Actuator et l’API du dashboard ne sont pas exposés sur l’entrée métier.
+
+### test(middleware): vérifier les en-têtes communs sur les deux services
+
+Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ResponseHeadersIT`. Vérifier la chaîne de middlewares commune, indépendamment du service cible.
