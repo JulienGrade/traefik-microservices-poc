@@ -237,3 +237,7 @@ Exécuter sans autre charge `./mvnw -Pe2e -pl integration-tests verify -Dit.test
 ### test(reload): contrôler le rechargement du fichier sans recréer Traefik
 
 Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ReloadIT`. Le test change temporairement l’en-tête, attend son application et restaure le fichier dans un finally. Il contrôle que l’identifiant du conteneur Traefik ne change pas ; éviter toute édition simultanée du fichier.
+
+### test(discovery): contrôler ajout et retrait automatiques du service optionnel
+
+Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=DiscoveryIT`. Le test observe 404 → 200 → 404, avec le même conteneur Traefik. Il laisse shipping-service arrêté et construit son image au besoin.
