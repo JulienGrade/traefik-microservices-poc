@@ -245,3 +245,7 @@ Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=DiscoveryIT`. Le 
 ### test(scaling): observer trois réplicas sans changer la gateway
 
 Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ScalingIT`. Le test exige trois hostnames distincts et le même identifiant Traefik. Les requêtes sont espacées pour rester sous le quota. Il rétablit une instance catalogue à la fin.
+
+### test(failover): contrôler le retrait d’une instance arrêtée
+
+Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=FailoverIT`. Arrêter une des deux instances et contrôler vingt réponses sur la survivante après six secondes de convergence. Le test rétablit une instance ; il ne garantit pas zéro erreur durant la détection de panne.
