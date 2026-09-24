@@ -217,3 +217,7 @@ Avant activation, `/api/shipping/quote` renvoie 404. Lancer `docker compose --pr
 ### build(test): créer le module Java de tests de la stack
 
 Ajouter un module Maven activé uniquement par `-Pe2e`, JUnit et Failsafe, avec client HTTP Java et commandes Docker bornées. Compiler sans exécuter de scénario : `./mvnw -Pe2e -pl integration-tests test-compile`. Aucun autre runtime de test n’est nécessaire.
+
+### test(api): vérifier le parcours métier à travers Traefik en Java
+
+Avec la stack démarrée : `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ApiContractsIT`. Vérifier catalogue, prix exact, création et relecture d’une commande, validation et produit absent.
