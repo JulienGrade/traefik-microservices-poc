@@ -213,3 +213,7 @@ Appliquer un quota de 20 requêtes/s avec burst 40, uniquement sur le catalogue.
 ### feat(discovery): découvrir le service optionnel de livraison
 
 Avant activation, `/api/shipping/quote` renvoie 404. Lancer `docker compose --profile discovery up --build -d --wait shipping-service`, puis vérifier 200. Aucun changement de configuration Traefik ni de ses routes existantes. Arrêter avec `docker compose --profile discovery stop shipping-service` : après convergence, la route revient à 404.
+
+### build(test): créer le module Java de tests de la stack
+
+Ajouter un module Maven activé uniquement par `-Pe2e`, JUnit et Failsafe, avec client HTTP Java et commandes Docker bornées. Compiler sans exécuter de scénario : `./mvnw -Pe2e -pl integration-tests test-compile`. Aucun autre runtime de test n’est nécessaire.
