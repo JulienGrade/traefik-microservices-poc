@@ -249,3 +249,7 @@ Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ScalingIT`. Le te
 ### test(failover): contrôler le retrait d’une instance arrêtée
 
 Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=FailoverIT`. Arrêter une des deux instances et contrôler vingt réponses sur la survivante après six secondes de convergence. Le test rétablit une instance ; il ne garantit pas zéro erreur durant la détection de panne.
+
+### test(outage): vérifier le 503 lors d’une panne complète du catalogue
+
+Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=CatalogOutageIT`. Le test arrête le catalogue, vérifie le 503 sur la création de commande et rétablit le service. Il distingue la gestion de dépendance Spring Boot du retrait de serveurs par Traefik.
