@@ -229,3 +229,7 @@ Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=RoutingIsolationI
 ### test(middleware): vérifier les en-têtes communs sur les deux services
 
 Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ResponseHeadersIT`. Vérifier la chaîne de middlewares commune, indépendamment du service cible.
+
+### test(rate-limit): vérifier le refus des rafales et la recharge du quota
+
+Exécuter sans autre charge `./mvnw -Pe2e -pl integration-tests verify -Dit.test=RateLimitIT`. La rafale doit produire des 429, puis revenir à 200 après recharge ; ce test ne constitue pas un benchmark.
