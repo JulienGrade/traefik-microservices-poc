@@ -233,3 +233,7 @@ Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ResponseHeadersIT
 ### test(rate-limit): vérifier le refus des rafales et la recharge du quota
 
 Exécuter sans autre charge `./mvnw -Pe2e -pl integration-tests verify -Dit.test=RateLimitIT`. La rafale doit produire des 429, puis revenir à 200 après recharge ; ce test ne constitue pas un benchmark.
+
+### test(reload): contrôler le rechargement du fichier sans recréer Traefik
+
+Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ReloadIT`. Le test change temporairement l’en-tête, attend son application et restaure le fichier dans un finally. Il contrôle que l’identifiant du conteneur Traefik ne change pas ; éviter toute édition simultanée du fichier.
