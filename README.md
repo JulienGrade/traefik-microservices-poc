@@ -241,3 +241,7 @@ Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ReloadIT`. Le tes
 ### test(discovery): contrôler ajout et retrait automatiques du service optionnel
 
 Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=DiscoveryIT`. Le test observe 404 → 200 → 404, avec le même conteneur Traefik. Il laisse shipping-service arrêté et construit son image au besoin.
+
+### test(scaling): observer trois réplicas sans changer la gateway
+
+Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=ScalingIT`. Le test exige trois hostnames distincts et le même identifiant Traefik. Les requêtes sont espacées pour rester sous le quota. Il rétablit une instance catalogue à la fin.
