@@ -2,13 +2,121 @@
 
 ## Lancer
 
-Les commandes de lancement sont introduites dans les étapes ci-dessous.
+Prérequis : Git, Docker Engine ou Docker Desktop démarré et Docker Compose v2.24+. Pour les tests Maven, utiliser un JDK 17 minimum ; Java 21 convient. Le wrapper télécharge Maven 3.9.11 au premier appel. Sous Windows, utiliser `mvnw.cmd` à la place de `./mvnw` ; les exemples curl ci-dessous fonctionnent dans Git Bash ou WSL.
+
+Depuis la racine du projet :
+
+```bash
+docker compose --profile discovery config --quiet
+docker compose up --build -d --wait --wait-timeout 180
+docker compose ps
+```
+
+La stack principale démarre Traefik, product-service et order-service. shipping-service est optionnel. Le build Docker exécute les tests du service avant de construire son image ; aucun JDK local n’est nécessaire pour démarrer cette stack.
+
+| Accès | Adresse |
+| --- | --- |
+| Catalogue | http://localhost:8080/api/products |
+| Produit | http://localhost:8080/api/products/1 |
+| Instance du catalogue | http://localhost:8080/api/products/instance |
+| Instance des commandes | http://localhost:8080/api/orders/instance |
+| Création de commande | POST http://localhost:8080/api/orders |
+| Dashboard Traefik | http://localhost:8088/dashboard/ |
+
+Créer une commande :
+
+```bash
+curl -i http://localhost:8080/api/orders -H 'Content-Type: application/json' -d '{"productId":1,"quantity":2}'
+```
+
+Attendre HTTP 201, un total de 179.80 et un header Location contenant l’URL de consultation. Les produits sont prédéfinis ; les commandes sont en mémoire et disparaissent au redémarrage d’order-service. Seul le catalogue est répliqué dans les scénarios suivants.
+
+Activer une nouvelle API après le démarrage de Traefik :
+
+```bash
+curl -i http://localhost:8080/api/shipping/quote
+docker compose --profile discovery up --build -d --wait --wait-timeout 180 shipping-service
+curl -i http://localhost:8080/api/shipping/quote
+```
+
+Le premier appel doit retourner 404, puis le second 200 et un montant de 4.90 EUR. Les labels du nouveau service suffisent à créer la route : aucune modification de Traefik, de sa configuration centrale ou des API déjà déployées.
+
+Répliquer le catalogue :
+
+```bash
+docker compose up -d --wait --scale product-service=3
+curl http://localhost:8080/api/products/instance
+```
+
+Répéter l’appel pour observer plusieurs hostnames. Traefik découvre les réplicas et répartit les requêtes. Les tests Java contrôlent explicitement les trois instances et le maintien du même conteneur Traefik.
+
+Consulter les logs et arrêter le projet :
+
+```bash
+docker compose logs -f traefik product-service order-service
+docker compose --profile discovery down --remove-orphans
+```
+
+Les ports publiés sont limités à localhost. Le dashboard est local et sans authentification. Le socket Docker donne des droits importants même avec un montage `:ro` ; cette configuration est destinée à un POC local. La gateway ne fournit pas ici de TLS, de JWT ou de persistance. Les healthchecks Traefik ne surveillent que le trafic traversant la gateway, pas l’appel direct order → product.
 
 ## Tester
 
-Chaque étape indique la commande adaptée aux éléments disponibles.
+Tests des trois services :
+
+```bash
+./mvnw -B -ntp verify
+```
+
+Résultat attendu : BUILD SUCCESS. Ces tests couvrent le catalogue, les prix, le client HTTP, les commandes, les quantités invalides et le devis. La stack Docker n’a pas besoin d’être démarrée pour cette commande.
+
+Tests d’intégration Java de la stack démarrée :
+
+```bash
+./mvnw -B -ntp -Pe2e -pl integration-tests verify
+```
+
+Ces tests utilisent JUnit, Java HttpClient et Maven Failsafe. Certains manipulent les conteneurs Docker et modifient temporairement le fichier de middlewares ; les lancer sur ce projet local, sans trafic ni édition simultanée. Ils rétablissent une instance catalogue, la configuration initiale et un service de livraison arrêté. Le quota est local à une gateway et par IP, pas un quota distribué.
+
+Pour exécuter un scénario particulier :
+
+```bash
+./mvnw -Pe2e -pl integration-tests verify -Dit.test=ApiContractsIT
+```
+
+| Classe de test | Contrôle effectué |
+| --- | --- |
+| ApiContractsIT | Catalogue, création et lecture d’une commande, validation |
+| RoutingIsolationIT | Absence d’exposition des routes internes et faux préfixes |
+| ResponseHeadersIT | Application de la chaîne commune aux deux services |
+| RateLimitIT | HTTP 429 sous rafale et recharge du quota |
+| ReloadIT | Modification du middleware sans recréer Traefik |
+| DiscoveryIT | Ajout et retrait d’une route via les événements Docker |
+| ScalingIT | Répartition sur trois hostnames distincts |
+| FailoverIT | Retrait d’une instance arrêtée après convergence |
+| CatalogOutageIT | Retour 503 lorsque tout le catalogue est indisponible |
+
+Compiler les tests de stack sans les exécuter :
+
+```bash
+./mvnw -Pe2e -pl integration-tests test-compile
+```
+
+Le workflow `.github/workflows/verify.yml` exécute les tests des services, construit la stack Docker puis lance les tests de stack Java. Les rapports Maven se trouvent dans les dossiers `target/surefire-reports` et `integration-tests/target/failsafe-reports`.
+
+Contrôles effectués lors de la création du livrable : 17 tests de services réussis, compilation de tous les scénarios et 5 tests HTTP d’intégration réussis avec Traefik 3.6.2 natif devant les JAR (API, routage, en-têtes et quota). Le rechargement du provider fichier a également été contrôlé. Aucun moteur Docker n’étant disponible dans cet environnement, la découverte Docker, la réplication et les scénarios de panne Docker restent à exécuter via les commandes ci-dessus. Aucun résultat de CI distante n’est revendiqué.
+
+Consulter l’historique :
+
+```bash
+git log --oneline --reverse
+git log --format='%h | %an <%ae> | %s'
+git show <sha>
+git switch --detach <sha>
+git switch main
+```
 
 ## Étapes et commits
+
 
 Les titres sont les messages exacts des commits, dans leur ordre de création. Utiliser `git log --oneline --reverse`, puis `git switch --detach <sha>` pour consulter une étape. Revenir avec `git switch main`.
 
@@ -261,3 +369,7 @@ Ajouter le workflow GitHub Actions : tests et packaging des trois services puis 
 ### ci(docker): exécuter les scénarios Traefik en Java
 
 Compléter le workflow avec le démarrage Compose et Failsafe : contrats, routage, middlewares, découverte, scaling et pannes. Les logs sont récupérés même en échec ; les conteneurs sont arrêtés à la fin.
+
+### docs: finaliser le lancement les tests Java et les étapes du projet
+
+Regrouper les commandes de lancement et de test, leurs résultats attendus et les scénarios Traefik dans ce README. Conserver chaque étape avec son message de commit exact. Vérifier `git log --oneline --reverse` et `git status`.
