@@ -253,3 +253,7 @@ Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=FailoverIT`. Arr�
 ### test(outage): vérifier le 503 lors d’une panne complète du catalogue
 
 Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=CatalogOutageIT`. Le test arrête le catalogue, vérifie le 503 sur la création de commande et rétablit le service. Il distingue la gestion de dépendance Spring Boot du retrait de serveurs par Traefik.
+
+### ci(java): vérifier les services et compiler les tests de stack
+
+Ajouter le workflow GitHub Actions : tests et packaging des trois services puis compilation des tests d’intégration Java. Déclenchement par push, PR ou workflow_dispatch ; aucun run distant n’est présumé réussi.
