@@ -257,3 +257,7 @@ Exécuter `./mvnw -Pe2e -pl integration-tests verify -Dit.test=CatalogOutageIT`.
 ### ci(java): vérifier les services et compiler les tests de stack
 
 Ajouter le workflow GitHub Actions : tests et packaging des trois services puis compilation des tests d’intégration Java. Déclenchement par push, PR ou workflow_dispatch ; aucun run distant n’est présumé réussi.
+
+### ci(docker): exécuter les scénarios Traefik en Java
+
+Compléter le workflow avec le démarrage Compose et Failsafe : contrats, routage, middlewares, découverte, scaling et pannes. Les logs sont récupérés même en échec ; les conteneurs sont arrêtés à la fin.
